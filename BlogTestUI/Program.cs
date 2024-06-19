@@ -11,7 +11,7 @@ namespace BlogTestUI
         {
             SqlData db = GetConnection();
 
-            AddPost(db);
+            ShowPostDetails(db);
 
             Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
@@ -93,6 +93,22 @@ namespace BlogTestUI
             };
 
             db.AddPost(post);
+        }
+
+        public static void ShowPostDetails(SqlData db)
+        {
+            Console.Write("Enter a post ID: ");
+            int id = Int32.Parse(Console.ReadLine());
+
+            ListPostModel post = db.ShowPostDetails(id);
+            Console.WriteLine(post.Title);
+            Console.WriteLine($"by {post.FirstName} {post.LastName} [{post.UserName}]");
+
+            Console.WriteLine();
+
+            Console.WriteLine(post.Body); 
+
+            Console.WriteLine(post.DateCreated.ToString("MMM d yyyy"));
         }
     }
 }
