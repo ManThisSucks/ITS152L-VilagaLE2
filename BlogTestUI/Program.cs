@@ -24,7 +24,7 @@ namespace BlogTestUI
 
             do
             {
-                Console.Write("Would you like to [R]egister, [A]dd post, [V]iew posts, or [E]xit?\n>>>");
+                Console.Write("Would you like to [R]egister, [A]dd post, [V]iew post, or [E]xit?\n>>>");
                 option = Char.ToUpper(Console.ReadKey().KeyChar);
                 Console.WriteLine();
                 switch (option)
