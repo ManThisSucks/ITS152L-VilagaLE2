@@ -28,5 +28,14 @@ namespace BlogDataLibrary.Data
 
             return result;
         }
+
+        public void Register(string username, string firstName, string lastName, string password)
+        {
+            _db.SaveData<dynamic>(
+                "dbo.spUsers_Register",
+                new { username, firstName, lastName, password },
+                connectionStringName,
+                true);
+        }
     }
 }
