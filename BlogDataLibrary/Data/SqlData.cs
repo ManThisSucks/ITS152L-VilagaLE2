@@ -37,5 +37,13 @@ namespace BlogDataLibrary.Data
                 connectionStringName,
                 true);
         }
+
+        public void AddPost(PostModel post)
+        {
+            _db.SaveData("spPosts_Insert", 
+                         new { post.UserId, post.Title, post.Body, post.DateCreated }, 
+                         connectionStringName, 
+                         true);
+        }
     }
 }

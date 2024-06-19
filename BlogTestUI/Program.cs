@@ -11,7 +11,7 @@ namespace BlogTestUI
         {
             SqlData db = GetConnection();
 
-            Register(db);
+            AddPost(db);
 
             Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
@@ -72,6 +72,27 @@ namespace BlogTestUI
             var lastName = Console.ReadLine();
 
             db.Register(username, firstname, lastName, password);
+        }
+
+        public static void AddPost(SqlData db)
+        {
+            UserModel user = GetCurrentUser(db);
+
+            Console.Write("Title: ");
+            string title = Console.ReadLine();
+
+            Console.WriteLine("Write Body: ");
+            string body = Console.ReadLine();
+
+            PostModel post = new PostModel
+            {
+                Title = title,
+                Body = body,
+                DateCreated = DateTime.Now,
+                UserId = user.Id
+            };
+
+            db.AddPost(post);
         }
     }
 }
