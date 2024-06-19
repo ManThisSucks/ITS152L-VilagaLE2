@@ -71,7 +71,7 @@ namespace BlogTestUI
             Console.Write("Enter last name: ");
             var lastName = Console.ReadLine();
 
-            db.Register(username, password, firstname, lastName);
+            db.Register(username, firstname, lastName, password);
         }
     }
 }
