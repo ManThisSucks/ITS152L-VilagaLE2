@@ -19,9 +19,9 @@ namespace BlogDataLibrary.Data
         }
 
         // added ? below to make IDE happy
-        public UserModel Authenticate(string username, string password)
+        public UserModel? Authenticate(string username, string password)
         {
-            UserModel result = _db.LoadData<UserModel, dynamic>("dbo.spUsers_Authenticate",
+            UserModel? result = _db.LoadData<UserModel?, dynamic>("dbo.spUsers_Authenticate",
                                                                 new {username, password},
                                                                 connectionStringName, 
                                                                 true).FirstOrDefault();
