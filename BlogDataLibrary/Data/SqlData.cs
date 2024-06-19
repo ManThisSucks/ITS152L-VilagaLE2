@@ -11,7 +11,7 @@ namespace BlogDataLibrary.Data
     public class SqlData
     {
         private ISqlDataAccess _db;
-        private const string connectionStringName = "SqlDb";
+        private const string connectionStringName = "BlogDb";
 
         public SqlData(ISqlDataAccess db) 
         {
