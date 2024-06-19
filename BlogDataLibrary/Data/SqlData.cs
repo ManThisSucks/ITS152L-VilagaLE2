@@ -1,4 +1,5 @@
 ﻿using BlogDataLibrary.Database;
+using BlogDataLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,17 @@ namespace BlogDataLibrary.Data
         public SqlData(ISqlDataAccess db) 
         {
             _db = db;
+        }
+
+        // added ? below to make IDE happy
+        public UserModel? Authenticate(string username, string password)
+        {
+            UserModel? result = _db.LoadData<UserModel?, dynamic>("dbo.spUsers_Authenticate",
+                                                                new {username, password},
+                                                                connectionStringName, 
+                                                                true).FirstOrDefault();
+
+            return result;
         }
     }
 }
