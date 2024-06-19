@@ -7,14 +7,45 @@ namespace BlogTestUI
 {
     internal class Program
     {
+        
         static void Main(string[] args)
         {
             SqlData db = GetConnection();
 
-            ShowPostDetails(db);
+            DoCustomOption(db);
 
             Console.WriteLine("Press Enter to exit...");
             Console.ReadLine();
+        }
+
+        private static void DoCustomOption(SqlData db)
+        {
+            char? option;
+
+            do
+            {
+                Console.Write("Would you like to [R]egister, [A]dd post, [V]iew posts, or [E]xit?\n>>>");
+                option = Char.ToUpper(Console.ReadKey().KeyChar);
+                Console.WriteLine();
+                switch (option)
+                {
+                    case 'R':
+                        Register(db);
+                        break;
+                    case 'A':
+                        AddPost(db);
+                        break;
+                    case 'V':
+                        ShowPostDetails(db);
+                        break;
+                    case 'E':
+                        break;
+                    default:
+                        option = null;
+                        break;
+                }
+                Console.WriteLine("\n---\n");
+            } while (option != 'E');
         }
 
         public static void Authenticate(SqlData db)

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BlogDataLibrary.Data
 {
-    public class SqlData
+    public class SqlData : ISqlData
     {
         private ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
 
-        public SqlData(ISqlDataAccess db) 
+        public SqlData(ISqlDataAccess db)
         {
             _db = db;
         }
@@ -22,8 +22,8 @@ namespace BlogDataLibrary.Data
         public UserModel? Authenticate(string username, string password)
         {
             UserModel? result = _db.LoadData<UserModel?, dynamic>("dbo.spUsers_Authenticate",
-                                                                new {username, password},
-                                                                connectionStringName, 
+                                                                new { username, password },
+                                                                connectionStringName,
                                                                 true).FirstOrDefault();
 
             return result;
@@ -40,9 +40,9 @@ namespace BlogDataLibrary.Data
 
         public void AddPost(PostModel post)
         {
-            _db.SaveData("spPosts_Insert", 
-                         new { post.UserId, post.Title, post.Body, post.DateCreated }, 
-                         connectionStringName, 
+            _db.SaveData("spPosts_Insert",
+                         new { post.UserId, post.Title, post.Body, post.DateCreated },
+                         connectionStringName,
                          true);
         }
 
