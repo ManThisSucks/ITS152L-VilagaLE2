@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogDataLibrary.Data
 {
-    internal class SqlData
+    public class SqlData
     {
         private ISqlDataAccess _db;
         private const string connectionStringName = "SqlDb";
