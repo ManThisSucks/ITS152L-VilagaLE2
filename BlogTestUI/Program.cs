@@ -20,7 +20,7 @@ namespace BlogTestUI
 
         private static void DoCustomOption(SqlData db)
         {
-            char? option;
+            char option;
 
             do
             {
@@ -38,10 +38,8 @@ namespace BlogTestUI
                     case 'V':
                         ShowPostDetails(db);
                         break;
-                    case 'E':
-                        break;
                     default:
-                        option = null;
+                        // if option == 'E', we will break out of the do-while. Otherwise, we continue.
                         break;
                 }
                 Console.WriteLine("\n---\n");
