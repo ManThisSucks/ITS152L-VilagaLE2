@@ -129,15 +129,23 @@ namespace BlogTestUI
             Console.Write("Enter a post ID: ");
             int id = Int32.Parse(Console.ReadLine());
 
-            ListPostModel post = db.ShowPostDetails(id);
-            Console.WriteLine(post.Title);
-            Console.WriteLine($"by {post.FirstName} {post.LastName} [{post.UserName}]");
+            ListPostModel? post = db.ShowPostDetails(id);
 
-            Console.WriteLine();
+            if (post == null)
+            {
+                Console.WriteLine("Post does not exist.");
+            } 
+            else
+            {
+                Console.WriteLine(post.Title);
+                Console.WriteLine($"by {post.FirstName} {post.LastName} [{post.UserName}]");
 
-            Console.WriteLine(post.Body); 
+                Console.WriteLine();
 
-            Console.WriteLine(post.DateCreated.ToString("MMM d yyyy"));
+                Console.WriteLine(post.Body);
+
+                Console.WriteLine(post.DateCreated.ToString("MMM d yyyy"));
+            }
         }
     }
 }
