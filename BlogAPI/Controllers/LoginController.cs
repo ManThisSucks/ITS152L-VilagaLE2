@@ -57,5 +57,15 @@ namespace BlogAPI.Controllers
 
             return NotFound("User not found");
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/[controller]/register")]
+
+        public ActionResult Register([FromBody] UserModel user)
+        {
+            _db.Register(user.UserName, user.FirstName, user.LastName, user.Password);
+            return Ok("User Registered");
+        }
     }
 }
