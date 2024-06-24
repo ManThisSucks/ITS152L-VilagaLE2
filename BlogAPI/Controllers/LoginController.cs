@@ -49,7 +49,7 @@ namespace BlogAPI.Controllers
         {
             UserModel? user = _db.Authenticate(login.UserName, login.Password);
 
-            if (user == null)
+            if (user != null)
             {
                 var token = GenerateToken(user);
                 return Ok(token);
