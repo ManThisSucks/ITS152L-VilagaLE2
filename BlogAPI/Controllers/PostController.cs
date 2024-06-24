@@ -25,5 +25,15 @@ namespace BlogAPI.Controllers
 
             return Ok(posts);
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("/api/[controller]/{id}")]
+        public ActionResult ShowPostDetails(int id)
+        {
+            ListPostModel? post = _db.ShowPostDetails(id);
+
+            return Ok(post);
+        }
     }
 }
