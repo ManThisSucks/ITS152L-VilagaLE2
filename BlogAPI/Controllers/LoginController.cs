@@ -1,5 +1,6 @@
 ﻿using BlogDataLibrary.Data;
 using BlogDataLibrary.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -38,6 +39,23 @@ namespace BlogAPI.Controllers
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/[controller]/login")]
+
+        public ActionResult Login([FromBody] UserLogin login)
+        {
+            UserModel? user = _db.Authenticate(login.UserName, login.Password);
+
+            if (user == null)
+            {
+                var token = GenerateToken(user);
+                return Ok(token);
+            }
+
+            return NotFound("User not found");
         }
     }
 }
