@@ -36,6 +36,7 @@ namespace BlogTestUI
                         AddPost(db);
                         break;
                     case 'V':
+                        ListPosts(db);
                         ShowPostDetails(db);
                         break;
                     default:
@@ -122,6 +123,18 @@ namespace BlogTestUI
             };
 
             db.AddPost(post);
+        }
+
+        public static void ListPosts(SqlData db)
+        {
+            List<ListPostModel> posts = db.ListPosts();
+
+            foreach (ListPostModel post in posts)
+            {
+                Console.WriteLine($"{post.Id}. Title: {post.Title} by {post.UserName} [{post.DateCreated.ToString("yyyy-MM-dd")}]";
+                Console.WriteLine($"{post.Body.Substring(0, 20)}...");
+                Console.WriteLine();
+            }
         }
 
         public static void ShowPostDetails(SqlData db)
