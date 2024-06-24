@@ -1,3 +1,5 @@
+using BlogDataLibrary.Data;
+using BlogDataLibrary.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -17,6 +19,7 @@ namespace BlogAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // LE4 Setting up #13
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -31,6 +34,11 @@ namespace BlogAPI
                 };
             });
 
+            // LE4 Setting up #14
+            builder.Services.AddTransient<ISqlData, SqlData>();
+            builder.Services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -42,6 +50,7 @@ namespace BlogAPI
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();  // LE4 Setting up #15
             app.UseAuthorization();
 
 
